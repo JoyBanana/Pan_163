@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <title>download list</title>
+</head>
+<body>
+
+<div style="text-align:center">
+
+    <table class="table table-striped" width="5">
+        <h4 align="center">下载列表</h4>
+        <thead>
+        <tr>
+            <th width="50%" class="text-center">文件名</th>
+            <th width="30%" class="text-center">修改日期</th>
+            <th width="20%" class="text-center">操作</th>
+        </tr>
+        </thead>
+        <tbody id="add_tr">
+
+        </tbody>
+    </table>
+
+    <!--<button onclick="add_table()" class="btn btn-danger">tianjia</button>-->
+
+</div>
+
+</body>
+<script src="/static/myjs.js"></script>
+</html>
