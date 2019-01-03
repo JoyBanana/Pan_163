@@ -1,16 +1,9 @@
-import configparser
-import os
 import nos
+from request.initKEY import getClient
+from request.tools import covertFukeSize
 
-# 从配置文件中获取到key
-conf = configparser.ConfigParser()
-conf.read(os.path.join(os.path.dirname(os.getcwd()), 'access.ini'))
-access_key = conf.get('Access', 'accessKey')
-secret_key = conf.get('Access', 'secretKey')
-end_point = "nos-eastchina1.126.net"
 bucket = "joybanana"
-
-client = nos.Client(access_key, secret_key, end_point=end_point)
+client = getClient()
 
 
 def getFiles():
@@ -18,12 +11,15 @@ def getFiles():
     try:
         object_lists = client.list_objects(bucket)
         for object_list in object_lists["response"].findall("Contents"):
-            fileList.append(object_list.find("Key").text)
+            d = {'Key': object_list.find("Key").text, 'Size': covertFukeSize(int(object_list.find("Size").text)),
+                 'LastModified': object_list.find("LastModified").text}
+            fileList.append(d)
         return fileList
 
 
     except nos.exceptions.ServiceException as e:
         print(
+            "ServiceException: %s\n"
             "status_code: %s\n"
             "error_type: %s\n"
             "error_code: %s\n"

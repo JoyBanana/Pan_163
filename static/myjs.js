@@ -6,7 +6,7 @@ function loadFileList() {
             list = JSON.parse(fileList.responseText);
             //console.log(list);
             for (let i = 0; i < list.length; i++) {
-                add_table(list[i]);
+                add_table(list[i].Key,list[i].LastModified,list[i].Size);
             }
         }
     };
@@ -14,40 +14,48 @@ function loadFileList() {
     fileList.send();
 }
 
-function add_table(fileName) {
+function add_table(Name,Date,Size) {
     parent = document.getElementById("add_tr");
     div = document.createElement("tr");
     div.setAttribute("class", "success");
     parent.appendChild(div);
 
-    list1 = document.createElement("td");
-    list1.setAttribute("width", "50%");
-    list1.setAttribute("align", "center");
-    list1.innerHTML = fileName;
-    div.appendChild(list1);
+    fileName = document.createElement("td");
+    fileName.setAttribute("width", "30%");
+    fileName.setAttribute("align", "center");
+    fileName.innerHTML = Name;
+    div.appendChild(fileName);
 
-    list2 = document.createElement("td");
-    list2.setAttribute("width", "30%");
-    list2.setAttribute("align", "center");
-    list2.innerHTML = "N/A";
-    div.appendChild(list2);
+    fileDate = document.createElement("td");
+    fileDate.setAttribute("width", "25%");
+    fileDate.setAttribute("align", "center");
+    fileDate.innerHTML = Date;
+    div.appendChild(fileDate);
 
-    list3 = document.createElement("td");
-    list3.setAttribute("width", "20%");
-    list3.setAttribute("align", "center");
-    div.appendChild(list3);
+    fileSize = document.createElement("td");
+    fileSize.setAttribute("width", "25%");
+    fileSize.setAttribute("align", "center");
+    fileSize.innerHTML = Size;
+    div.appendChild(fileSize);
+
+    fileOpe = document.createElement("td");
+    fileOpe.setAttribute("width", "20%");
+    fileOpe.setAttribute("align", "center");
+    div.appendChild(fileOpe);
 
     list4 = document.createElement("td");
     list4.setAttribute("type", "button");
     list4.setAttribute("class", "btn btn-default");
     list4.setAttribute("onclick", "window.open('https://joybanana.nos-eastchina1.126.net/" + fileName + "')");
     list4.innerHTML = "下载";
-    list3.appendChild(list4);
+    fileOpe.appendChild(list4);
 
+
+    <!--删除-->
     listform = document.createElement("form");
     listform.setAttribute("action", "/delete");
     listform.setAttribute("method", "post");
-    list3.appendChild(listform);
+    fileOpe.appendChild(listform);
 
 
     listdel = document.createElement("td");
