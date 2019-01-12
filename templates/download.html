@@ -1,37 +1,166 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh" dir="ltr">
+
 <head>
-    <meta charset="UTF-8">
-    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}">
-    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://unpkg.com/nprogress@0.2.0/nprogress.css">
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <script src="https://unpkg.com/nprogress@0.2.0/nprogress.js"></script>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-    <title>download list</title>
+
+  <style>
+    .el-aside {
+      color: #333;
+      margin-right: 0px;
+    }
+
+    .box-card {
+      height: 85vh;
+      margin-left: 30px;
+      margin-right: 10px;
+      padding: 22px 0;
+    }
+
+    .box-select {
+      margin-top: 8px;
+      text-align: center;
+    }
+  </style>
+  <title>test</title>
 </head>
+
 <body>
+  <div id="app3">
+    <el-container style="height: 100%;margin-top: 20px">
+      <el-aside width="20%" height="100%">
+        <el-card class="box-card" shadow="never">
+          <div v-on:click="change_shadow1">
+            <el-card class="box-select" v-bind:style="background1" v-bind:shadow="shadow1">{{shadow1}}</el-card>
+          </div>
+          <div v-on:click="change_shadow2">
+            <el-card class="box-select" v-bind:style="background2" v-bind:shadow="shadow2">{{shadow2}}</el-card>
+          </div>
+          <div v-on:click="getting_data">
+            <el-card class="box-select" v-bind:style="background3" v-bind:shadow="shadow3">{{shadow3}}</el-card>
+          </div>
+        </el-card>
+      </el-aside>
+      <el-main id="app5" style="padding: 0px;">
+        <el-card shadow="hover" style="height: 90vh;margin-left: 10px;margin-right: 20px;">
 
-<div style="text-align:center">
-
-    <table class="table table-striped" width="5">
-        <h4 align="center">下载列表</h4>
-        <thead>
-        <tr>
-            <th width="30%" class="text-center">文件名</th>
-            <th width="25" class="text-center">修改日期</th>
-            <th width="25%" class="text-center">大小</th>
-            <th width="20%" class="text-center">操作</th>
-        </tr>
-        </thead>
-        <tbody id="add_tr">
-
-        </tbody>
-    </table>
-
-    <!--<button onclick="add_table()" class="btn btn-danger">tianjia</button>-->
-
-</div>
-
+          <div slot="header" class="clearfix">
+            <span>免费空间使用量:<el-tooltip class="item" effect="dark" v-bind:content="usedHint" placement="top-end">
+                <el-progress v-bind:percentage="usedPercent" status="success"></el-progress>
+              </el-tooltip>
+            </span>
+          </div>
+          <el-table v-bind:data='tableDDD' style="height:auto;">
+            <el-table-column prop="date" label="日期" width="140">
+            </el-table-column>
+            <el-table-column prop="name" label="姓名" width="120">
+            </el-table-column>
+            <el-table-column prop="address" label="地址">
+            </el-table-column>
+          </el-table>
+        </el-card>
+      </el-main>
+    </el-container>
+  </div>
 </body>
-<script src="/static/myjs.js"></script>
+
+<script type="text/javascript">
+  var app3 = new Vue({
+    el: '#app3',
+    data: {
+      used: 0,
+      json_data: null,
+      shadow1: 'hover',
+      shadow2: 'hover',
+      shadow3: 'hover',
+      background1: 'background:#FFFFFF',
+      background2: 'background:#FFFFFF',
+      background3: 'background:#FFFFFF',
+      tableDDD: [{
+        date: '2016-05-03',
+        name: '王xiao虎',
+        address: '上海市普陀区金沙江路 1516 弄'
+      }]
+    },
+    methods: {
+      change_shadow1: function() {
+        this.shadow1 = 'always',
+          this.shadow2 = 'hover',
+          this.shadow3 = 'hover',
+          this.used = 1072029154,
+          this.background1 = 'background:#FCFCFC',
+          this.background2 = 'background:#FFFFFF',
+          this.background3 = 'background:#FFFFFF'
+      },
+      change_shadow2: function() {
+        this.shadow1 = 'hover',
+          this.shadow2 = 'always',
+          this.shadow3 = 'hover',
+          this.used = 12072029154,
+          this.background1 = 'background:#FFFFFF',
+          this.background2 = 'background:#FCFCFC',
+          this.background3 = 'background:#FFFFFF'
+      },
+      change_shadow3: function() {
+        this.shadow1 = 'hover',
+          this.shadow2 = 'hover',
+          this.shadow3 = 'always',
+          this.used = 51072029154,
+          this.background1 = 'background:#FFFFFF',
+          this.background2 = 'background:#FFFFFF',
+          this.background3 = 'background:#FCFCFC',
+          this.tableDDD.push({
+            date: '2016-05-03',
+            name: '王虎',
+            address: '上海市普陀区金沙江路 1516 弄'
+          })
+      },
+      getting_data: function() {
+
+        axios
+          .get('https://api.coindesk.com/v1/bpi/currentprice.json')
+          .then(response => (console.log(response)))
+
+        //发送get请求
+        // this.$http.get('http://127.0.0.1:5000/files').then(function(res) {
+        //   console.log(res);
+        //   if (res.status === 200)
+        //     //this.json_data = res.body[0],
+        //     // for (let i = 0; i < res.body[0].lenght; i++) {
+        //     //   this.tableDDD.push({
+        //     //       name: res.body[0][i].Key,
+        //     //       date: res.body[0][i].LastModified,
+        //     //       address: res.body[0][i].Size
+        //     //     }),
+        //     //     this.used = res.body[1]
+        //     // }
+        // }, function(respones) {
+        //   console.log('请求接口失败');
+        // });
+      }
+    },
+    computed: {
+      usedHint: function() {
+        return ('已使用' + this.usedPercent + '%');
+      },
+      usedPercent: function() {
+        return (Number((this.used / 530000000).toFixed(1))); //这个值大概是50G
+      }
+    }
+  })
+</script>
+
+<script type="text/javascript">
+  NProgress.start();
+  NProgress.done();
+</script>
+
+
 </html>

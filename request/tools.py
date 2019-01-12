@@ -27,4 +27,5 @@ def convertFuckSize(size):
 def convertFuckDate(date):
     time_array = time.strptime(date, "%Y-%m-%dT%H:%M:%S +0800")
     timestamp = int(time.mktime(time_array))
-    return timestamp
+    mtime = time.strftime("%Y-%m-%d %H:%M", time.localtime(timestamp))
+    return mtime

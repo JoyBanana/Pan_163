@@ -1,6 +1,6 @@
 import nos
 from request.initKEY import getClient
-from request.tools import convertFuckSize
+from request.tools import *
 
 bucket = "joybanana"
 client = getClient()
@@ -13,7 +13,7 @@ def getFiles():
         object_lists = client.list_objects(bucket)
         for object_list in object_lists["response"].findall("Contents"):
             d = {'Key': object_list.find("Key").text, 'Size': convertFuckSize(int(object_list.find("Size").text)),
-                 'LastModified': object_list.find("LastModified").text}
+                 'LastModified': convertFuckDate(object_list.find("LastModified").text)}
             fileList.append(d)
             L += int(object_list.find("Size").text)
         return fileList, L

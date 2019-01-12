@@ -1,5 +1,6 @@
 from flask import Flask, request, render_template
 from request.fileOpe import *
+from flask_cors import cross_origin
 import json
 
 app = Flask(__name__)
@@ -11,6 +12,7 @@ def home():
 
 
 @app.route('/files', methods=['GET'])
+@cross_origin()
 def list_file():
     return json.dumps(getFiles())
 
