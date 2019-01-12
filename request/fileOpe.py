@@ -1,6 +1,6 @@
 import nos
 from request.initKEY import getClient
-from request.tools import covertFukeSize
+from request.tools import convertFuckSize
 
 bucket = "joybanana"
 client = getClient()
@@ -8,13 +8,15 @@ client = getClient()
 
 def getFiles():
     fileList = []
+    L = 0
     try:
         object_lists = client.list_objects(bucket)
         for object_list in object_lists["response"].findall("Contents"):
-            d = {'Key': object_list.find("Key").text, 'Size': covertFukeSize(int(object_list.find("Size").text)),
+            d = {'Key': object_list.find("Key").text, 'Size': convertFuckSize(int(object_list.find("Size").text)),
                  'LastModified': object_list.find("LastModified").text}
             fileList.append(d)
-        return fileList
+            L += int(object_list.find("Size").text)
+        return fileList, L
 
 
     except nos.exceptions.ServiceException as e:
