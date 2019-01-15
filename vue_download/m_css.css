@@ -1,0 +1,16 @@
+.el-aside {
+  color: #333;
+  margin-right: 0px;
+}
+
+.box-card {
+  height: 85vh;
+  margin-left: 30px;
+  margin-right: 10px;
+  padding: 22px 0;
+}
+
+.box-select {
+  margin-top: 8px;
+  text-align: center;
+}
