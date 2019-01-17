@@ -1,14 +1,9 @@
-from flask import Flask, request, render_template
+from flask import Flask, request
 from request.fileOpe import *
 from flask_cors import cross_origin
 import json
 
 app = Flask(__name__)
-
-
-@app.route('/')
-def home():
-    return render_template('download.html')
 
 
 @app.route('/files', methods=['GET'])
@@ -18,10 +13,12 @@ def list_file():
 
 
 @app.route('/delete', methods=['POST'])
+@cross_origin()
 def delete():
     fileName = request.form['fileName']
     deleteFile(fileName)
-    return render_template('download.html')
+    m_json = {'status': 'okay'}
+    return json.dumps(m_json)
 
 
 if __name__ == '__main__':

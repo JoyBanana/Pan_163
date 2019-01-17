@@ -1,7 +1,7 @@
 # Pan_163
 
 ![](https://img.shields.io/github/last-commit/JoyBanana/Pan_163.svg?style=flat-square)
-![](https://img.shields.io/badge/Python-3.0%2B-orange.svg)
+![](https://img.shields.io/badge/Python-3.0%2B-orange.svg?style=flat-square)
 ![](https://img.shields.io/github/commit-activity/y/JoyBanana/Pan_163.svg?style=flat-square)
 
 
