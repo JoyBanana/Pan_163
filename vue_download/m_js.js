@@ -36,7 +36,7 @@ var app3 = new Vue({
                 this.background3 = 'background:#ECF5FF',
                 NProgress.start();
             axios
-                .get('http://39.96.4.4:5000/files')
+                .get('http://localhost:5000/files')
                 .then(response => {
                     (this.json_data = response.data), this.tableDDD = this.json_data[0], NProgress.done(),
                         this.$message({
@@ -48,6 +48,9 @@ var app3 = new Vue({
                 this.app3.$message.error('获取数据失败');
             })
 
+        },
+        checkDetail: function (value) {
+            window.open('https://joybanana.nos-eastchina1.126.net/'+value)
         }
     },
     computed: {

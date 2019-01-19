@@ -2,53 +2,63 @@
 <html lang="zh" dir="ltr">
 
 <head>
-  <meta charset="utf-8">
-  <title>test</title>
-  <link rel="stylesheet" href="m_css.css">
-  <link rel="stylesheet" href="https://unpkg.com/nprogress@0.2.0/nprogress.css">
-  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
-  <script src="https://unpkg.com/nprogress@0.2.0/nprogress.js"></script>
-  <script src="https://unpkg.com/vue/dist/vue.js"></script>
-  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <meta charset="utf-8">
+    <title>test</title>
+    <link rel="stylesheet" href="m_css.css">
+    <link rel="stylesheet" href="https://unpkg.com/nprogress@0.2.0/nprogress.css">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/nprogress@0.2.0/nprogress.js"></script>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 
-<body style="background: linear-gradient(to right, rgb(7, 101, 133), rgb(255, 255, 255));">
-  <div id="app3">
+<body style="background: linear-gradient(to left, rgb(230, 218, 218), rgb(39, 64, 70));">
+<div id="app3">
     <el-container style="height: 100%;margin-top: 20px">
-      <el-aside width="20%" height="100%">
-        <el-card class="box-card" shadow="never">
-          <div @click="change_shadow1">
-            <el-card class="box-select" v-bind:style="background1" v-bind:shadow="shadow1">{{shadow1}}</el-card>
-          </div>
-          <div @click="change_shadow2">
-            <el-card class="box-select" v-bind:style="background2" v-bind:shadow="shadow2">{{shadow2}}</el-card>
-          </div>
-          <div @click="change_shadow3">
-            <el-card class="box-select" v-bind:style="background3" v-bind:shadow="shadow3">{{shadow3}}</el-card>
-          </div>
-        </el-card>
-      </el-aside>
-      <el-main style="padding: 0px;">
-        <el-card shadow="hover" style="margin-left: 10px;margin-right: 20px;">
-          <div slot="header" class="clearfix">
+        <el-aside width="20%" height="100%">
+            <el-card class="box-card" shadow="never">
+                <div @click="change_shadow1">
+                    <el-card class="box-select" v-bind:style="background1"
+                             v-bind:shadow="shadow1">{{ shadow1 }}</el-card>
+                </div>
+                <div @click="change_shadow2">
+                    <el-card class="box-select" v-bind:style="background2"
+                             v-bind:shadow="shadow2">{{ shadow2 }}</el-card>
+                </div>
+                <div @click="change_shadow3">
+                    <el-card class="box-select" v-bind:style="background3"
+                             v-bind:shadow="shadow3">{{ shadow3 }}</el-card>
+                </div>
+            </el-card>
+        </el-aside>
+        <el-main style="padding: 0px;">
+            <el-card shadow="hover" style="margin-left: 10px;margin-right: 20px;">
+                <div slot="header" class="clearfix">
             <span>免费空间使用量:<el-tooltip class="item" effect="dark" v-bind:content="usedHint" placement="top-end">
                 <el-progress v-bind:percentage="usedPercent" status="success"></el-progress>
               </el-tooltip>
             </span>
-          </div>
-          <el-table v-bind:data='tableDDD' style="height:auto;">
-            <el-table-column prop="LastModified" label="日期" width="auto">
-            </el-table-column>
-            <el-table-column prop="Key" label="姓名" width="auto">
-            </el-table-column>
-            <el-table-column prop="Size" label="大小">
-            </el-table-column>
-          </el-table>
-        </el-card>
-      </el-main>
+                </div>
+                <el-table v-bind:data='tableDDD' style="height:auto;">
+                    <el-table-column prop="LastModified" label="日期" width="auto">
+                    </el-table-column>
+                    <el-table-column prop="Key" label="文件名" width="auto">
+                    </el-table-column>
+                    <el-table-column prop="Size" label="大小">
+                    </el-table-column>
+
+                    <el-table-column label="操作" align="center" min-width="auto">
+                        <template slot-scope="scope">　　　　
+                            <el-button type="text" @click="checkDetail(scope.row.Key)">下载</el-button>
+                        </template>
+                    </el-table-column>
+
+                </el-table>
+            </el-card>
+        </el-main>
     </el-container>
-  </div>
+</div>
 </body>
 
 <script type="text/javascript" src="m_js.js"></script>
