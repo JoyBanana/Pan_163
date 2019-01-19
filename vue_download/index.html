@@ -13,10 +13,10 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 
-<body style="background: linear-gradient(to left, rgb(230, 218, 218), rgb(39, 64, 70));">
+<body  style="background: linear-gradient(to left, rgb(230, 218, 218), rgb(39, 64, 70));">
 <div id="app3">
     <el-container style="height: 100%;margin-top: 20px">
-        <el-aside width="20%" height="100%">
+        <el-aside width="20%" height="100%" style="position: fixed">
             <el-card class="box-card" shadow="never">
                 <div @click="change_shadow1">
                     <el-card class="box-select" v-bind:style="background1"
@@ -28,11 +28,11 @@
                 </div>
                 <div @click="change_shadow3">
                     <el-card class="box-select" v-bind:style="background3"
-                             v-bind:shadow="shadow3">{{ shadow3 }}</el-card>
+                             v-bind:shadow="shadow3">163存储文件</el-card>
                 </div>
             </el-card>
         </el-aside>
-        <el-main style="padding: 0px;">
+        <el-main style="padding: 0px; margin-left: 20%;">
             <el-card shadow="hover" style="margin-left: 10px;margin-right: 20px;">
                 <div slot="header" class="clearfix">
             <span>免费空间使用量:<el-tooltip class="item" effect="dark" v-bind:content="usedHint" placement="top-end">
