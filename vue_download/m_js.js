@@ -38,7 +38,7 @@ var app3 = new Vue({
       axios //ajax请求后端接口
         .get('http://localhost:5000/files')
         .then(response => {
-          (this.json_data = response.data), this.tableDDD = this.json_data[0].slice(0,10), NProgress.done(),
+          (this.json_data = response.data), this.tableDDD = this.json_data[0].slice(0, 10), NProgress.done(),
             this.$message({
               message: '数据更新成功',
               type: 'success'
@@ -49,7 +49,7 @@ var app3 = new Vue({
         })
 
     },
-    checkDetail: function(value) {//跳转下载文件
+    checkDetail: function(value) { //跳转下载文件
       window.open('https://joybanana.nos-eastchina1.126.net/' + value)
     },
     handleCurrentChange(value) { //按照页码返回对应数据
@@ -57,10 +57,30 @@ var app3 = new Vue({
       //先判断是不是最后一页
       var ttt = this.json_data[0].length - (value * 10 - 10)
       if (ttt < 10) { //是最后一页
-        this.tableDDD = this.json_data[0].slice((value * 10 - 10),this.json_data[0].length)
+        this.tableDDD = this.json_data[0].slice((value * 10 - 10), this.json_data[0].length)
       } else {
-        this.tableDDD = this.json_data[0].slice((value * 10 - 10),(value * 10))
+        this.tableDDD = this.json_data[0].slice((value * 10 - 10), (value * 10))
       }
+    },
+    delete_file: function(file_name) {
+      this.$prompt('此操作将永久删除' + file_name + ', 输入管理员密码继续。', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        showInput: true
+      }).then(({
+        value
+      }) => { //value是指验证
+        this.$message({
+          type: 'success',
+          message: '删除' + file_name + '成功!'
+        });
+        console.log('to delete file ' + file_name + ' and verfly is ' + value);
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        });
+      });
     }
   },
   computed: {

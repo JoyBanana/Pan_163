@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>test</title>
+  <title>下载</title>
   <link rel="stylesheet" href="m_css.css">
   <link rel="stylesheet" href="https://unpkg.com/nprogress@0.2.0/nprogress.css">
   <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
@@ -46,8 +46,9 @@
             </el-table-column>
 
             <el-table-column label="操作" align="center" min-width="auto">
-              <template slot-scope="scope">　　　　
-                <el-button type="text" @click="checkDetail(scope.row.Key)">下载</el-button>
+              <template slot-scope="scope">
+                <el-button  @click="checkDetail(scope.row.Key)" icon="el-icon-download" circle></el-button>
+                <el-button  @click="delete_file(scope.row.Key)" icon="el-icon-delete" circle></el-button>
               </template>
             </el-table-column>
 
