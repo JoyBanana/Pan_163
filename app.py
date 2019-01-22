@@ -1,24 +1,27 @@
 from flask import Flask, request
 from request.fileOpe import *
-from flask_cors import cross_origin
+from flask_cors import cross_origin, CORS
 import json
 
 app = Flask(__name__)
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 
 @app.route('/files', methods=['GET'])
-@cross_origin()
 def list_file():
     return json.dumps(getFiles())
 
 
 @app.route('/delete', methods=['POST'])
-@cross_origin()
 def delete():
     fileName = request.form['fileName']
-    deleteFile(fileName)
-    m_json = {'status': 'okay'}
-    return json.dumps(m_json)
+    verify = request.form['user']
+    print(fileName + '     ' + verify)
+    if verify == 'joy':
+        deleteFile(fileName)
+        m_json = {'status': 'okay'}
+        return json.dumps(m_json)
+    return json.dumps({'status': 'filed'})
 
 
 if __name__ == '__main__':
