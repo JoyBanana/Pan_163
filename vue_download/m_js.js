@@ -36,7 +36,7 @@ var app3 = new Vue({
                 this.background3 = 'background:#ECF5FF',
                 NProgress.start();
             axios //ajax请求后端接口
-                .get('http://localhost:5000/files')
+                .get(window.location.href+'api/files')
                 .then(response => {
                     (this.json_data = response.data), this.tableDDD = this.json_data[0].slice(0, 10), NProgress.done(),
                         this.$message({
@@ -74,7 +74,7 @@ var app3 = new Vue({
                 params = new URLSearchParams();
                 params.append('fileName', file_name);
                 params.append('user', value);
-                axios.post('http://localhost:5000/delete', params).then(respones => {
+                axios.post(window.location.href+'api/delete', params).then(respones => {
                     if (respones.data['status'] === 'okay') {
                         this.$message({
                             message: '删除成功',
